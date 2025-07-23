@@ -7,6 +7,44 @@ import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import VideoPreview from "./VideoPreview";
 
+const TypingEffect = ({ text, delay = 150, startDelay = 0 }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showCursor, setShowCursor] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const startTimeout = setTimeout(() => {
+      setStarted(true);
+      setShowCursor(true);
+    }, startDelay);
+    return () => clearTimeout(startTimeout);
+  }, [startDelay]);
+
+  useEffect(() => {
+    if (started && currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, delay);
+      return () => clearTimeout(timeout);
+    } else if (started && currentIndex >= text.length) {
+      // Hide cursor after typing is complete
+      const hideTimeout = setTimeout(() => {
+        setShowCursor(false);
+      }, 1000);
+      return () => clearTimeout(hideTimeout);
+    }
+  }, [currentIndex, text, delay, started]);
+
+  return (
+    <span>
+      {displayedText}
+      {showCursor && <span className="animate-pulse text-yellow-300">|</span>}
+    </span>
+  );
+};
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
@@ -140,33 +178,43 @@ const Hero = () => {
           />
         </div>
 
-        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
-          G<b>A</b>MING
-        </h1>
-
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font hero-heading text-blue-100">
-              redefi<b>n</b>e
-            </h1>
+            <div className="mb-6">
+              <h1 className="special-font text-blue-100 uppercase font-bold text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
+                Hasin<b>d</b>u
+              </h1>
+              <h2 className="special-font text-blue-100 uppercase font-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl mt-2 ml-2">
+                Wanninayake
+              </h2>
+            </div>
 
-            <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
-              Enter the Metagame Layer <br /> Unleash the Play Economy
-            </p>
+            <div className="mb-8 max-w-2xl">
+              <div className="text-blue-100 font-robert-regular leading-relaxed">
+                <div className="mb-4 text-lg sm:text-xl md:text-2xl lg:text-3xl">
+                  <TypingEffect text="Software Developer" delay={120} startDelay={500} />
+                </div>
+                <div className="text-white text-base sm:text-lg md:text-xl lg:text-2xl">
+                  <TypingEffect text="Building Innovative Solutions" delay={100} startDelay={2500} />
+                </div>
+              </div>
+            </div>
 
-            <Button
-              id="watch-trailer"
-              title="Watch trailer"
-              leftIcon={<TiLocationArrow />}
-              containerClass="bg-yellow-300 flex-center gap-1"
-            />
+            <a
+              href="CV_Hasindu_Wanninayake.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                id="view-portfolio"
+                title="View Portfolio"
+                leftIcon={<TiLocationArrow />}
+                containerClass="bg-yellow-300 flex-center gap-1 cursor-pointer"
+              />
+            </a>
           </div>
         </div>
       </div>
-
-      <h1 className="special-font hero-heading absolute bottom-5 right-5 text-black">
-        G<b>A</b>MING
-      </h1>
     </div>
   );
 };

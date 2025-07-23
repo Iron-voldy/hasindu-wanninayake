@@ -35,15 +35,35 @@ const Contact = () => {
 
         <div className="flex flex-col items-center text-center">
           <p className="mb-10 font-general text-[10px] uppercase">
-            Join Zentry
+            Get In Touch
           </p>
 
-          <AnimatedTitle
-            title="let&#39;s b<b>u</b>ild the <br /> new era of <br /> g<b>a</b>ming t<b>o</b>gether."
-            className="special-font !md:text-[6.2rem] w-full font-zentry !text-5xl !font-black !leading-[.9]"
-          />
+          <div style={{
+            textShadow: '4px 4px 8px rgba(0,0,0,1), 0 0 25px rgba(0,0,0,1), 8px 8px 16px rgba(0,0,0,0.8), 2px 2px 4px rgba(0,0,0,1)'
+          }}>
+            <AnimatedTitle
+              title="let&#39;s w<b>o</b>rk <br /> t<b>o</b>gether on your <br /> n<b>e</b>xt pr<b>o</b>ject."
+              className="special-font !md:text-[2.5rem] w-full font-zentry !text-xl !font-light !leading-[.9] [&_.animated-word]:!font-light"
+            />
+          </div>
 
-          <Button title="contact us" containerClass="mt-10 cursor-pointer" />
+          <div className="mt-10 flex flex-col items-center gap-4">
+            <a href="mailto:hasindutwm@gmail.com" className="text-blue-50 hover:text-yellow-300 transition-colors">
+              hasindutwm@gmail.com
+            </a>
+            <p className="text-blue-50">+94 77 9393662</p>
+            <div className="flex gap-4 mt-4">
+              <a href="https://www.linkedin.com/in/hasindu-wanninayake-1ab155276/" target="_blank" rel="noopener noreferrer" className="text-blue-50 hover:text-yellow-300 transition-colors">
+                LinkedIn
+              </a>
+              <a href="https://github.com/Iron-voldy" target="_blank" rel="noopener noreferrer" className="text-blue-50 hover:text-yellow-300 transition-colors">
+                GitHub
+              </a>
+              <a href="https://hasindu-theekshana-theta.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-blue-50 hover:text-yellow-300 transition-colors">
+                Portfolio
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

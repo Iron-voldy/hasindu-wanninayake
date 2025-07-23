@@ -65,11 +65,17 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
         autoPlay
         className="absolute left-0 top-0 size-full object-cover object-center"
       />
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/50"></div>
       <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
         <div>
-          <h1 className="bento-title special-font">{title}</h1>
+          <div className="bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 mb-4 inline-block">
+            <h1 className="text-2xl md:text-4xl font-semibold text-white font-sans tracking-wide">
+              {title}
+            </h1>
+          </div>
           {description && (
-            <p className="mt-3 max-w-64 text-xs md:text-base">{description}</p>
+            <p className="mt-3 max-w-64 text-xs md:text-base text-white/90 drop-shadow-md">{description}</p>
           )}
         </div>
 
@@ -102,26 +108,20 @@ const Features = () => (
   <section className="bg-black pb-52">
     <div className="container mx-auto px-3 md:px-10">
       <div className="px-5 py-32">
-        <p className="font-circular-web text-lg text-blue-50">
-          Into the Metagame Layer
+        <p className="font-circular-web text-3xl md:text-4xl font-bold text-blue-50 mb-4">
+          My Projects
         </p>
         <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
-          Immerse yourself in a rich and ever-expanding universe where a vibrant
-          array of products converge into an interconnected overlay experience
-          on your world.
+          Showcase of innovative projects spanning IoT systems, healthcare applications, 
+          e-commerce platforms, and modern web technologies.
         </p>
       </div>
 
       <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
         <BentoCard
           src="videos/feature-1.mp4"
-          title={
-            <>
-              radia<b>n</b>t
-            </>
-          }
-          description="A cross-platform metagame app, turning your activities across Web2 and Web3 games into a rewarding adventure."
-          isComingSoon
+          title="IoT Piano Visualizer"
+          description="Interactive piano learning tool with ESP32, RGB LEDs, and web application. Features tutorial and play modes with real-time LED guidance. (June 2024 – Nov 2024)"
         />
       </BentoTilt>
 
@@ -129,60 +129,50 @@ const Features = () => (
         <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2">
           <BentoCard
             src="videos/feature-2.mp4"
-            title={
-              <>
-                zig<b>m</b>a
-              </>
-            }
-            description="An anime and gaming-inspired NFT collection - the IP primed for expansion."
-            isComingSoon
+            title="Ravana Health Care Application"
+            description="Hospital management system with QR scanning, medicine tracking, report management, and role-based authentication. Technologies: Java, QR Code, Database Management (Feb 2023 – April 2023)"
           />
         </BentoTilt>
 
         <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
           <BentoCard
             src="videos/feature-3.mp4"
-            title={
-              <>
-                n<b>e</b>xus
-              </>
-            }
-            description="A gamified social hub, adding a new dimension of play to social interaction for Web3 communities."
-            isComingSoon
+            title="Diatel AI Chat Application"
+            description="AI-powered chatbot application built with PHP, web technologies, and wit.ai integration for intelligent conversational experiences. (June 2023)"
           />
         </BentoTilt>
 
         <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
           <BentoCard
             src="videos/feature-4.mp4"
-            title={
-              <>
-                az<b>u</b>l
-              </>
-            }
-            description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
-            isComingSoon
+            title="Hotel Table Reservation System"
+            description="Java-based hotel table booking system with QR Code functionality, database management, and web development technologies. (Feb 2025 – March 2025)"
           />
         </BentoTilt>
 
         <BentoTilt className="bento-tilt_2">
-          <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
-            <h1 className="bento-title special-font max-w-64 text-black">
-              M<b>o</b>re co<b>m</b>ing s<b>o</b>on.
-            </h1>
-
-            <TiLocationArrow className="m-5 scale-[5] self-end" />
-          </div>
-        </BentoTilt>
-
-        <BentoTilt className="bento-tilt_2">
-          <video
+          <BentoCard
             src="videos/feature-5.mp4"
-            loop
-            muted
-            autoPlay
-            className="size-full object-cover object-center"
+            title="Fuel Management System"
+            description="MERN stack application for fuel management with React frontend, MongoDB database, Node.js/Express.js backend, and PDF generation capabilities. (Feb 2025 – March 2025)"
           />
+        </BentoTilt>
+
+        <BentoTilt className="bento-tilt_2">
+          <div className="flex size-full flex-col justify-between bg-gradient-to-br from-blue-600 to-purple-700 p-5">
+            <div className="bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 mb-4 inline-block">
+              <h1 className="text-xl md:text-3xl font-semibold text-white font-sans tracking-wide">
+                View More Projects
+              </h1>
+            </div>
+            <div className="flex flex-col space-y-2 text-white/90 text-sm">
+              <a href="https://github.com/Iron-voldy" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                → GitHub Portfolio
+              </a>
+              <p className="text-xs text-white/70">15+ projects and counting...</p>
+            </div>
+            <TiLocationArrow className="m-5 scale-[5] self-end text-white/80" />
+          </div>
         </BentoTilt>
       </div>
     </div>
