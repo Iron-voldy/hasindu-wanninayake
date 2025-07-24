@@ -53,9 +53,6 @@ const VideoPreloader = ({ children }) => {
         </div>
       </div>
     );
-  }
-
-  return children;
 };
 
 export default VideoPreloader;
