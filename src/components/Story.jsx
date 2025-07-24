@@ -145,7 +145,7 @@ const FloatingImage = () => {
             <div className="flex justify-center">
               <div className="relative h-48 w-full max-w-2xl overflow-hidden rounded-md border border-white/20">
                 <video
-                  src="videos/hero-7.mp4"
+                  src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327637/hero-7_wuiqzh.mp4"
                   loop
                   muted
                   autoPlay
@@ -176,7 +176,7 @@ const FloatingImage = () => {
               <div className="flex justify-center lg:justify-end">
                 <div className="relative h-40 w-full max-w-md overflow-hidden rounded-md border border-white/20">
                   <video
-                    src="videos/hero-5.mp4"
+                    src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327632/hero-5_nuke5r.mp4"
                     loop
                     muted
                     autoPlay
@@ -205,7 +205,7 @@ const FloatingImage = () => {
               <div className="flex justify-center lg:justify-start">
                 <div className="relative h-40 w-full max-w-md overflow-hidden rounded-md border border-white/20">
                   <video
-                    src="videos/hero-6.mp4"
+                    src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327672/hero-6_klgyha.mp4"
                     loop
                     muted
                     autoPlay
