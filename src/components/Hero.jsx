@@ -62,10 +62,18 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    if (loadedVideos === totalVideos - 1) {
+    if (loadedVideos === totalVideos) {
       setLoading(false);
     }
   }, [loadedVideos]);
+
+  // Fallback timer to prevent infinite loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 5000); // 5 second fallback
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleMiniVdClick = () => {
     setHasClicked(true);
