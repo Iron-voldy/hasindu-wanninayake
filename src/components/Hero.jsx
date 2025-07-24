@@ -71,7 +71,7 @@ const Hero = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 5000); // 5 second fallback
+    }, 15000); // 15 second fallback for production
     return () => clearTimeout(timer);
   }, []);
 
@@ -132,11 +132,23 @@ const Hero = () => {
     <div className="relative h-dvh w-screen overflow-x-hidden">
       {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
-          {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
-          <div className="three-body">
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
+          <div className="flex flex-col items-center gap-6">
+            {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
+            <div className="three-body">
+              <div className="three-body__dot"></div>
+              <div className="three-body__dot"></div>
+              <div className="three-body__dot"></div>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-blue-600 mb-2">Loading Portfolio</p>
+              <p className="text-lg text-gray-600">Loading videos ({loadedVideos}/{totalVideos})</p>
+              <div className="w-64 bg-gray-200 rounded-full h-2 mt-4">
+                <div 
+                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${(loadedVideos / totalVideos) * 100}%` }}
+                ></div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -160,6 +172,7 @@ const Hero = () => {
                   id="current-video"
                   className="size-64 origin-center scale-150 object-cover object-center"
                   onLoadedData={handleVideoLoad}
+                  preload="metadata"
                 />
               </div>
             </VideoPreview>
@@ -173,6 +186,7 @@ const Hero = () => {
             id="next-video"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
             onLoadedData={handleVideoLoad}
+            preload="metadata"
           />
           <video
             src={getVideoSrc(
@@ -183,6 +197,7 @@ const Hero = () => {
             muted
             className="absolute left-0 top-0 size-full object-cover object-center"
             onLoadedData={handleVideoLoad}
+            preload="metadata"
           />
         </div>
 
