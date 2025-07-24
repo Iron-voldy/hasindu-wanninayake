@@ -64,7 +64,12 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
         loop
         muted
         autoPlay
+        playsInline
+        preload="metadata"
         className="absolute left-0 top-0 size-full object-cover object-center"
+        onLoadStart={() => console.log('Video loading:', src)}
+        onLoadedData={() => console.log('Video loaded:', src)}
+        onError={(e) => console.error('Video error:', src, e)}
       />
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-black/50"></div>

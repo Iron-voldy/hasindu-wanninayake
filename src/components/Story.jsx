@@ -152,6 +152,11 @@ const FloatingImage = () => {
                   muted
                   autoPlay
                   className="absolute left-0 top-0 size-full object-cover object-center"
+                  playsInline
+                  preload="metadata"
+                  onLoadStart={() => console.log('Story video loading:', getVideoUrl('hero-7'))}
+                  onLoadedData={() => console.log('Story video loaded:', getVideoUrl('hero-7'))}
+                  onError={(e) => console.error('Story video error:', getVideoUrl('hero-7'), e)}
                 />
                 <div className="absolute inset-0 bg-black/50"></div>
                 <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
@@ -183,6 +188,11 @@ const FloatingImage = () => {
                     muted
                     autoPlay
                     className="absolute left-0 top-0 size-full object-cover object-center"
+                    playsInline
+                    preload="metadata"
+                    onLoadStart={() => console.log('Story video loading:', getVideoUrl('hero-5'))}
+                    onLoadedData={() => console.log('Story video loaded:', getVideoUrl('hero-5'))}
+                    onError={(e) => console.error('Story video error:', getVideoUrl('hero-5'), e)}
                   />
                   <div className="absolute inset-0 bg-black/50"></div>
                   <div className="relative z-10 flex size-full flex-col justify-between p-4 text-blue-50">
@@ -212,6 +222,11 @@ const FloatingImage = () => {
                     muted
                     autoPlay
                     className="absolute left-0 top-0 size-full object-cover object-center"
+                    playsInline
+                    preload="metadata"
+                    onLoadStart={() => console.log('Story video loading:', getVideoUrl('hero-6'))}
+                    onLoadedData={() => console.log('Story video loaded:', getVideoUrl('hero-6'))}
+                    onError={(e) => console.error('Story video error:', getVideoUrl('hero-6'), e)}
                   />
                   <div className="absolute inset-0 bg-black/50"></div>
                   <div className="relative z-10 flex size-full flex-col justify-between p-4 text-blue-50">

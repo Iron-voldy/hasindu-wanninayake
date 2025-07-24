@@ -12,20 +12,20 @@ export const useVideo = () => {
 
 export const VideoProvider = ({ children }) => {
   const [videoUrls] = useState({
-    // Hero videos
-    'hero-1': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327859/hero-1_lidw3u.mp4",
-    'hero-2': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327831/hero-2_f01hrm.mp4",
-    'hero-3': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327936/hero-3_w9vukn.mp4",
-    'hero-4': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753328012/hero-4_s9fzsf.mp4",
-    'hero-5': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327632/hero-5_nuke5r.mp4",
-    'hero-6': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327672/hero-6_klgyha.mp4",
-    'hero-7': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327637/hero-7_wuiqzh.mp4",
-    // Feature videos
-    'feature-1': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327864/feature-1_v6hjjq.webm",
-    'feature-2': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753328184/feature-2_qt2azq.mp4",
-    'feature-3': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753328423/feature-3_mspoa4.mp4",
-    'feature-4': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753328354/feature-4_gmlih6.mp4",
-    'feature-5': "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327589/feature-5_dex7in.mp4"
+    // Hero videos - using auto format and quality optimization
+    'hero-1': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753327859/hero-1_lidw3u.mp4",
+    'hero-2': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753327831/hero-2_f01hrm.mp4", 
+    'hero-3': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753327936/hero-3_w9vukn.mp4",
+    'hero-4': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753328012/hero-4_s9fzsf.mp4",
+    'hero-5': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753327632/hero-5_nuke5r.mp4",
+    'hero-6': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753327672/hero-6_klgyha.mp4", 
+    'hero-7': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753327637/hero-7_wuiqzh.mp4",
+    // Feature videos - with optimization
+    'feature-1': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753327864/feature-1_v6hjjq.webm",
+    'feature-2': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753328184/feature-2_qt2azq.mp4",
+    'feature-3': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753328423/feature-3_mspoa4.mp4",
+    'feature-4': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753328354/feature-4_gmlih6.mp4",
+    'feature-5': "https://res.cloudinary.com/dcu7jcmct/video/upload/f_auto,q_auto/v1753327589/feature-5_dex7in.mp4"
   });
 
   const [preloadedVideos, setPreloadedVideos] = useState({});
@@ -103,15 +103,12 @@ export const VideoProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    preloadAllVideos();
+    // Skip preloading entirely - just show content immediately
+    console.log('Skipping video preloading - showing content immediately');
+    setAllVideosLoaded(true);
     
-    // Global fallback - show content after 15 seconds regardless
-    const globalTimeout = setTimeout(() => {
-      console.log('🚨 Global timeout reached - showing content anyway');
-      setAllVideosLoaded(true);
-    }, 15000);
-
-    return () => clearTimeout(globalTimeout);
+    // Optional: Still preload in background without blocking UI
+    // preloadAllVideos();
   }, []);
 
   return (

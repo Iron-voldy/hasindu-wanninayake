@@ -132,6 +132,10 @@ const Hero = () => {
                   id="current-video"
                   className="size-64 origin-center scale-150 object-cover object-center"
                   preload="metadata"
+                  playsInline
+                  onLoadStart={() => console.log('Hero video loading:', getVideoSrc((currentIndex % 4) + 1))}
+                  onLoadedData={() => console.log('Hero video loaded:', getVideoSrc((currentIndex % 4) + 1))}
+                  onError={(e) => console.error('Hero video error:', getVideoSrc((currentIndex % 4) + 1), e)}
                 />
               </div>
             </VideoPreview>
@@ -145,6 +149,10 @@ const Hero = () => {
             id="next-video"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
             preload="metadata"
+            playsInline
+            onLoadStart={() => console.log('Hero next video loading:', getVideoSrc(currentIndex))}
+            onLoadedData={() => console.log('Hero next video loaded:', getVideoSrc(currentIndex))}
+            onError={(e) => console.error('Hero next video error:', getVideoSrc(currentIndex), e)}
           />
           <video
             src={getVideoSrc(
@@ -155,6 +163,10 @@ const Hero = () => {
             muted
             className="absolute left-0 top-0 size-full object-cover object-center"
             preload="metadata"
+            playsInline
+            onLoadStart={() => console.log('Hero main video loading:', getVideoSrc(currentIndex === 4 - 1 ? 1 : currentIndex))}
+            onLoadedData={() => console.log('Hero main video loaded:', getVideoSrc(currentIndex === 4 - 1 ? 1 : currentIndex))}
+            onError={(e) => console.error('Hero main video error:', getVideoSrc(currentIndex === 4 - 1 ? 1 : currentIndex), e)}
           />
         </div>
 
