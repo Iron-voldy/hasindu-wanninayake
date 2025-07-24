@@ -1,10 +1,26 @@
 import { useVideo } from '../context/VideoContext';
+import { useEffect, useState } from 'react';
 
 const VideoPreloader = ({ children }) => {
   const { allVideosLoaded } = useVideo();
+  const [showContent, setShowContent] = useState(false);
 
-  if (!allVideosLoaded) {
-    return (
+  // Emergency fallback - show content after 5 seconds regardless
+  useEffect(() => {
+    const emergencyTimeout = setTimeout(() => {
+      console.log('🆘 Emergency timeout - showing content immediately');
+      setShowContent(true);
+    }, 5000);
+
+    return () => clearTimeout(emergencyTimeout);
+  }, []);
+
+  // Show content if videos loaded OR emergency timeout
+  if (allVideosLoaded || showContent) {
+    return children;
+  }
+
+  return (
       <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-black">
         <div className="text-center">
           {/* Animated Logo/Brand */}

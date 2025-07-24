@@ -36,54 +36,82 @@ export const VideoProvider = ({ children }) => {
   };
 
   const preloadAllVideos = async () => {
+    console.log('Starting video preload...');
     const videoElements = {};
     let loadedCount = 0;
     const totalVideos = Object.keys(videoUrls).length;
 
     const loadVideo = (videoId, url) => {
       return new Promise((resolve) => {
+        console.log(`Attempting to load ${videoId}: ${url}`);
         const video = document.createElement('video');
-        video.preload = 'auto';
+        video.preload = 'metadata'; // Changed from 'auto' to 'metadata' for faster loading
         video.muted = true;
         video.playsInline = true;
         video.crossOrigin = 'anonymous';
         
         const handleLoad = () => {
           loadedCount++;
-          console.log(`Loaded ${videoId}: ${loadedCount}/${totalVideos}`);
+          console.log(`✅ Loaded ${videoId}: ${loadedCount}/${totalVideos}`);
           videoElements[videoId] = video;
           resolve();
         };
 
-        const handleError = () => {
-          console.error(`Failed to load ${videoId}:`, url);
+        const handleError = (e) => {
+          console.error(`❌ Failed to load ${videoId}:`, url, e);
+          loadedCount++;
+          resolve(); // Continue even if one video fails
+        };
+
+        const handleTimeout = () => {
+          console.warn(`⏰ Timeout loading ${videoId}:`, url);
           loadedCount++;
           resolve();
         };
 
-        video.addEventListener('loadeddata', handleLoad);
+        video.addEventListener('loadedmetadata', handleLoad);
         video.addEventListener('error', handleError);
         video.addEventListener('abort', handleError);
+        
+        // Add timeout for individual videos
+        const timeout = setTimeout(handleTimeout, 10000); // 10 second timeout per video
+        
+        video.addEventListener('loadedmetadata', () => clearTimeout(timeout));
+        video.addEventListener('error', () => clearTimeout(timeout));
         
         video.src = url;
         video.load();
       });
     };
 
-    // Load all videos
-    const loadPromises = Object.entries(videoUrls).map(([videoId, url]) => 
-      loadVideo(videoId, url)
-    );
-
-    await Promise.all(loadPromises);
-    
-    setPreloadedVideos(videoElements);
-    setAllVideosLoaded(true);
-    console.log('All videos preloaded successfully');
+    try {
+      // Load videos in smaller batches
+      const batchSize = 2;
+      for (let i = 0; i < Object.entries(videoUrls).length; i += batchSize) {
+        const batch = Object.entries(videoUrls).slice(i, i + batchSize);
+        console.log(`Loading batch ${Math.floor(i/batchSize) + 1}:`, batch.map(([id]) => id));
+        await Promise.all(batch.map(([videoId, url]) => loadVideo(videoId, url)));
+      }
+      
+      setPreloadedVideos(videoElements);
+      setAllVideosLoaded(true);
+      console.log('🎉 All videos preloaded successfully');
+    } catch (error) {
+      console.error('Error during video preloading:', error);
+      setAllVideosLoaded(true); // Show content anyway
+    }
   };
 
   useEffect(() => {
     preloadAllVideos();
+    
+    // Global fallback - show content after 15 seconds regardless
+    const globalTimeout = setTimeout(() => {
+      console.log('🚨 Global timeout reached - showing content anyway');
+      setAllVideosLoaded(true);
+    }, 15000);
+
+    return () => clearTimeout(globalTimeout);
   }, []);
 
   return (
