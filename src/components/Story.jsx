@@ -119,7 +119,7 @@ const FloatingImage = () => {
             </p>
 
             <a
-              href="CV_Hasindu_Wanninayake.pdf"
+              href="https://hasindu-wanninayake.vercel.app/CV_Hasindu_Wanninayake.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 mb-8"

@@ -54,15 +54,20 @@ const Hero = () => {
   const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
 
-  const totalVideos = 4;
+  const totalVideos = 4; // 4 hero videos available
   const nextVdRef = useRef(null);
 
   const handleVideoLoad = () => {
-    setLoadedVideos((prev) => prev + 1);
+    setLoadedVideos((prev) => {
+      const newCount = prev + 1;
+      console.log(`Video loaded: ${newCount}/${totalVideos}`);
+      return newCount;
+    });
   };
 
   useEffect(() => {
-    if (loadedVideos === totalVideos) {
+    // Wait for at least 2 videos to load (main background video + preview video)
+    if (loadedVideos >= 2) {
       setLoading(false);
     }
   }, [loadedVideos]);
@@ -140,8 +145,8 @@ const Hero = () => {
               <div className="three-body__dot"></div>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-bold text-blue-600 mb-2">Loading Portfolio</p>
-              <p className="text-lg text-gray-600">Loading videos ({loadedVideos}/{totalVideos})</p>
+              <p className="text-2xl font-bold text-blue-600 mb-2">Preparing Experience</p>
+              <p className="text-lg text-gray-600">Crafting something amazing for you...</p>
               <div className="w-64 bg-gray-200 rounded-full h-2 mt-4">
                 <div 
                   className="bg-blue-600 h-2 rounded-full transition-all duration-300"
@@ -224,7 +229,7 @@ const Hero = () => {
             </div>
 
             <a
-              href="CV_Hasindu_Wanninayake.pdf"
+              href="https://hasindu-wanninayake.vercel.app/CV_Hasindu_Wanninayake.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >
