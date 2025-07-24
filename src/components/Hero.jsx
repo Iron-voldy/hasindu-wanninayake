@@ -51,39 +51,12 @@ const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
 
-  const [loading, setLoading] = useState(true);
-  const [loadedVideos, setLoadedVideos] = useState(0);
-
-  const totalVideos = 4; // 4 hero videos available
   const nextVdRef = useRef(null);
-
-  const handleVideoLoad = () => {
-    setLoadedVideos((prev) => {
-      const newCount = prev + 1;
-      console.log(`Video loaded: ${newCount}/${totalVideos}`);
-      return newCount;
-    });
-  };
-
-  useEffect(() => {
-    // Wait for at least 2 videos to load (main background video + preview video)
-    if (loadedVideos >= 2) {
-      setLoading(false);
-    }
-  }, [loadedVideos]);
-
-  // Fallback timer to prevent infinite loading
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 15000); // 15 second fallback for production
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleMiniVdClick = () => {
     setHasClicked(true);
 
-    setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
+    setCurrentIndex((prevIndex) => (prevIndex % 4) + 1);
   };
 
   useGSAP(
@@ -143,28 +116,6 @@ const Hero = () => {
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
-      {loading && (
-        <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
-          <div className="flex flex-col items-center gap-6">
-            {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
-            <div className="three-body">
-              <div className="three-body__dot"></div>
-              <div className="three-body__dot"></div>
-              <div className="three-body__dot"></div>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-blue-600 mb-2">Preparing Experience</p>
-              <p className="text-lg text-gray-600">Crafting something amazing for you...</p>
-              <div className="w-64 bg-gray-200 rounded-full h-2 mt-4">
-                <div 
-                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${(loadedVideos / totalVideos) * 100}%` }}
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       <div
         id="video-frame"
@@ -179,12 +130,11 @@ const Hero = () => {
               >
                 <video
                   ref={nextVdRef}
-                  src={getVideoSrc((currentIndex % totalVideos) + 1)}
+                  src={getVideoSrc((currentIndex % 4) + 1)}
                   loop
                   muted
                   id="current-video"
                   className="size-64 origin-center scale-150 object-cover object-center"
-                  onLoadedData={handleVideoLoad}
                   preload="metadata"
                 />
               </div>
@@ -198,18 +148,16 @@ const Hero = () => {
             muted
             id="next-video"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
-            onLoadedData={handleVideoLoad}
             preload="metadata"
           />
           <video
             src={getVideoSrc(
-              currentIndex === totalVideos - 1 ? 1 : currentIndex
+              currentIndex === 4 - 1 ? 1 : currentIndex
             )}
             autoPlay
             loop
             muted
             className="absolute left-0 top-0 size-full object-cover object-center"
-            onLoadedData={handleVideoLoad}
             preload="metadata"
           />
         </div>
