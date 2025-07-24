@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 import Button from "./Button";
 import VideoPreview from "./VideoPreview";
+import { useVideo } from "../context/VideoContext";
 
 const TypingEffect = ({ text, delay = 150, startDelay = 0 }) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -50,6 +51,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
+  const { getVideoUrl } = useVideo();
 
   const nextVdRef = useRef(null);
 
@@ -105,13 +107,7 @@ const Hero = () => {
   });
 
   const getVideoSrc = (index) => {
-    const videoUrls = {
-      1: "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327859/hero-1_lidw3u.mp4",
-      2: "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327831/hero-2_f01hrm.mp4",
-      3: "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327936/hero-3_w9vukn.mp4",
-      4: "https://res.cloudinary.com/dcu7jcmct/video/upload/v1753328012/hero-4_s9fzsf.mp4"
-    };
-    return videoUrls[index];
+    return getVideoUrl(`hero-${index}`);
   };
 
   return (

@@ -3,9 +3,11 @@ import { useRef } from "react";
 
 import Button from "./Button";
 import AnimatedTitle from "./AnimatedTitle";
+import { useVideo } from "../context/VideoContext";
 
 const FloatingImage = () => {
   const frameRef = useRef(null);
+  const { getVideoUrl } = useVideo();
 
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
@@ -145,7 +147,7 @@ const FloatingImage = () => {
             <div className="flex justify-center">
               <div className="relative h-48 w-full max-w-2xl overflow-hidden rounded-md border border-white/20">
                 <video
-                  src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327637/hero-7_wuiqzh.mp4"
+                  src={getVideoUrl('hero-7')}
                   loop
                   muted
                   autoPlay
@@ -176,7 +178,7 @@ const FloatingImage = () => {
               <div className="flex justify-center lg:justify-end">
                 <div className="relative h-40 w-full max-w-md overflow-hidden rounded-md border border-white/20">
                   <video
-                    src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327632/hero-5_nuke5r.mp4"
+                    src={getVideoUrl('hero-5')}
                     loop
                     muted
                     autoPlay
@@ -205,7 +207,7 @@ const FloatingImage = () => {
               <div className="flex justify-center lg:justify-start">
                 <div className="relative h-40 w-full max-w-md overflow-hidden rounded-md border border-white/20">
                   <video
-                    src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327672/hero-6_klgyha.mp4"
+                    src={getVideoUrl('hero-6')}
                     loop
                     muted
                     autoPlay

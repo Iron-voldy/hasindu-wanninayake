@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { TiLocationArrow } from "react-icons/ti";
+import { useVideo } from "../context/VideoContext";
 
 export const BentoTilt = ({ children, className = "" }) => {
   const [transformStyle, setTransformStyle] = useState("");
@@ -104,31 +105,34 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
   );
 };
 
-const Features = () => (
-  <section className="bg-black pb-52">
-    <div className="container mx-auto px-3 md:px-10">
-      <div className="px-5 py-32">
-        <p className="font-circular-web text-3xl md:text-4xl font-bold text-blue-50 mb-4">
-          My Projects
-        </p>
-        <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
-          Showcase of innovative projects spanning IoT systems, healthcare applications, 
-          e-commerce platforms, and modern web technologies.
-        </p>
-      </div>
+const Features = () => {
+  const { getVideoUrl } = useVideo();
+  
+  return (
+    <section className="bg-black pb-52">
+      <div className="container mx-auto px-3 md:px-10">
+        <div className="px-5 py-32">
+          <p className="font-circular-web text-3xl md:text-4xl font-bold text-blue-50 mb-4">
+            My Projects
+          </p>
+          <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
+            Showcase of innovative projects spanning IoT systems, healthcare applications, 
+            e-commerce platforms, and modern web technologies.
+          </p>
+        </div>
 
-      <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
-        <BentoCard
-          src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327864/feature-1_v6hjjq.webm"
-          title="IoT Piano Visualizer"
-          description="Interactive piano learning tool with ESP32, RGB LEDs, and web application. Features tutorial and play modes with real-time LED guidance. (June 2024 – Nov 2024)"
-        />
-      </BentoTilt>
+        <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
+          <BentoCard
+            src={getVideoUrl('feature-1')}
+            title="IoT Piano Visualizer"
+            description="Interactive piano learning tool with ESP32, RGB LEDs, and web application. Features tutorial and play modes with real-time LED guidance. (June 2024 – Nov 2024)"
+          />
+        </BentoTilt>
 
       <div className="grid h-[135vh] w-full grid-cols-2 grid-rows-3 gap-7">
         <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2">
           <BentoCard
-            src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753328184/feature-2_qt2azq.mp4"
+            src={getVideoUrl('feature-2')}
             title="Ravana Health Care Application"
             description="Hospital management system with QR scanning, medicine tracking, report management, and role-based authentication. Technologies: Java, QR Code, Database Management (Feb 2023 – April 2023)"
           />
@@ -136,7 +140,7 @@ const Features = () => (
 
         <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
           <BentoCard
-            src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753328423/feature-3_mspoa4.mp4"
+            src={getVideoUrl('feature-3')}
             title="Diatel AI Chat Application"
             description="AI-powered chatbot application built with PHP, web technologies, and wit.ai integration for intelligent conversational experiences. (June 2023)"
           />
@@ -144,7 +148,7 @@ const Features = () => (
 
         <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
           <BentoCard
-            src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753328354/feature-4_gmlih6.mp4"
+            src={getVideoUrl('feature-4')}
             title="Hotel Table Reservation System"
             description="Java-based hotel table booking system with QR Code functionality, database management, and web development technologies. (Feb 2025 – March 2025)"
           />
@@ -152,7 +156,7 @@ const Features = () => (
 
         <BentoTilt className="bento-tilt_2">
           <BentoCard
-            src="https://res.cloudinary.com/dcu7jcmct/video/upload/v1753327589/feature-5_dex7in.mp4"
+            src={getVideoUrl('feature-5')}
             title="Fuel Management System"
             description="MERN stack application for fuel management with React frontend, MongoDB database, Node.js/Express.js backend, and PDF generation capabilities. (Feb 2025 – March 2025)"
           />
@@ -177,6 +181,7 @@ const Features = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default Features;
